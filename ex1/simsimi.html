@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Message</title>
+	<!-- <script src="app.js" type="text/javascript" charset="utf-8" async defer></script> -->
+	<script src="http://code.jquery.com/jquery-2.0.0.min.js" ></script>
+	<script>
+	$(document).ready(function(handler){
+		$('#send').click(function() {
+		//Hàm lấy giá trị từ input form
+			var input= $('#inputText').val();
+		//Lấy thời gian
+			var d= new Date();
+			var hour = d.getHours();
+			var minute = d.getMinutes();
+			var amOrPm ='am';
+			if(hour>=0&&hour<12){
+				amOrPm='AM';
+			}else{
+				amOrPm='PM';
+				hour=24-hour;
+			}
+			$.getJSON("http://sandbox.api.simsimi.com/request.p?key=377cadf1-befa-4c02-9bca-09664a25d2b0&lc=en&ft=1.0&text="+input,function(data){
+							var items = [];
+					  $.each( data, function( key, val ) {
+					  	if(key=='response')
+					    items.push( "<li id='" + key + "'"+"style='list-style-type: none;' class='answer'"+">" + val + "</li>" );
+					  });
+
+					  $('#themvao').append('<div class="answer"><div class="textAnswer"><p>'+items+'</p></div><div class="timeAnswer"><p>'+hour+':'+minute+' ' +amOrPm+' </p></div></div>');
+				});
+					$('#themvao').append('<div class="question"><div class="textQuestion"><p>'
+					+input+'</p></div> <div class="timeQuestion">'+hour+':'+minute+' ' +amOrPm+'</div></div>');
+			
+			$('#themvao').scrollTop(500);
+		});
+
+	});
+		
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		var aboveHeight = $('header').outerHeight();
+		    $(window).scroll(function(){
+		        if ($(window).scrollTop() > aboveHeight){
+		        $('sticknav').addClass('fixed').css('top','0').next().css('padding-top','60px');
+		        } else {
+		       $('sticknav').removeClass('fixed').next().css('padding-top','0');
+		        }
+		    });
+		});
+	</script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body class="body">
+<sticknav>
+	<h4 class="nameChat">Jesse Williams</h4>
+</sticknav>
+	<h4 class="day"> Today</h4>
+	<div class="answer">
+		
+		<div class="textAnswer">
+			<p>Hey, when will the article go live?</p>
+
+		</div>
+		<div class="timeAnswer">
+			<p>8:52 PM </p>
+
+		</div>
+		
+	</div>
+	<br>
+	<div class="answer">
+		
+		<div class="textAnswer">
+			<p>Need to be first break this news.</p>
+		
+		</div>
+		<div class="timeAnswer">
+			<p>8:52 PM </p>
+
+		</div>
+	</div>
+	<div class="question">
+		
+		<div class="textQuestion">
+			<p>I'm publishing it as we speak.</p>
+			
+		</div>
+		<div class="timeQuestion">
+			8:53 PM
+		</div>
+
+	</div>
+	<div class="question">
+		
+		<div class="textQuestion">
+			<p>It's live now</p>
+		</div> 
+		<div class="timeQuestion">
+			8:53 PM
+		</div>
+	</div>
+	<div class="answer">
+		
+		<div class="textAnswer">
+			<p>Perfect great job.</p>
+		
+		</div>
+		<div class="timeAnswer">
+			<p>8:54 PM </p>
+
+		</div>
+	</div>
+	<div class="question">
+		
+		<div class="textQuestion">
+			<p>Thanks</p>
+		</div> 
+		<div class="timeQuestion">
+			8:55 PM
+		</div>
+	</div>
+	<div id="themvao">
+		
+	</div>
+	<div id="input">
+		<!-- <form method="post"> -->
+		<input type="text" name="nhap" id="inputText" ></input>
+		<button name="submit" id="send" >Send</button>
+	<!-- </form> -->	
+	</div>
+	
+</body>	
+</html>

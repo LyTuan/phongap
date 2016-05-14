@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Reminder</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="libraryJQuery.js"></script>
+	<script>
+			$(document).ready(function(event) {
+				// removeAll();
+				listItem();
+				var id=localStorage.length;
+				$("#img").click(function(event) {
+					
+					if(typeof(Storage)!="undefined"){	
+						id++;
+					console.log(id);
+					console.log(localStorage.length);
+					$("#note").append('<p></p><input type="checkbox" id="checkbox'+id+'"> </input><input id="'+id+'" placeholder="Enter your note in here" type="text" size="57"></input> <a href="#" id="xmark'+id+'"><img src="img/warning.png" class="xmark1" alt="xmark"  onclick="delItem('+id+');"></a>')
+					 var value;
+					 var checkbox;
+					 checkbox=$("#checkbox"+id).val();
+					 console.log(checkbox);
+					 localStorage.setItem("checkbox"+id,checkbox);
+				 if(id!=1){
+				 	 value = $("#"+(id-1)).val();
+					console.log(value);
+				 }else{
+				 	value =$("#input").val();
+				 }
+				console.log(value);
+				localStorage.setItem(id,value);
+			}
+
+		});
+			$(document).ready(function($) {
+				function delItem(id){
+					localStorage.removeItem(id);
+
+				}
+		});
+			});
+				
+			function listItem(){
+					for(var dem =1; dem<localStorage.length+1;dem++){
+
+						$('#note').append('<p></p><input type="checkbox" id="'+dem+'" value="'+localStorage.getItem("checkbox"+dem)+'"> </input><input value="'+localStorage.getItem(dem)+'" size="57"></input> <a href="#" id="xmark"><img src="img/warning.png" alt="xmark" id="xmark" class="xmark1" onclick="delItem("'+dem+');"></a>');
+					}
+				}
+				function removeAll(){
+					localStorage.clear();
+				}
+		
+			
+		
+	</script>
+</head>
+<body>
+	<div id="body">
+		<div class="main_menu" >
+		<h1>Reminder</h1>
+		<div id="add"><a href="#"><img src="img/img.png" alt="Cộng" id="img" class="img1"></a></div>
+		
+	</div>
+	<div id="note">
+		<input type="checkbox" id="checkbox"></input>
+		<input placeholder="Complete" id="input" type="text" size="57"> </input>
+		<a href="#" id="xmark"><img src="img/warning.png" alt="xmark" id="xmark" class="xmark1" onclick="delItem(0);"></a>
+	</div>
+
+	<div id="list">
+			
+	</div>
+	</div>
+</body>
+</html>

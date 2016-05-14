@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chạy chương trình jquery đầu tiên</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script language="javascript" src="http://code.jquery.com/jquery-2.0.0.min.js" type="text/javascript"></script>
+       <script type="text/javascript">
+            // Code jQuery tại đây
+		    // Khi click vào button có id = id-button
+		    $(document).ready(function(handler) {
+		    	$('#id-button').click(function(handler)
+		{
+		    // Cách 1: Khai báo biến và lấy giá trị
+		    var textbox = $('#id-textbox');
+		    alert(textbox.val());
+		    // Cách 2: Truy xuất trực tiếp
+		    alert($('#id-textbox').val());
+		});
+		    });
+		
+		 </script> 
+    </head>
+    <body>
+        <h1>jQuery</h1>
+        <input type="text" id="id-textbox" value=""/> <br/>
+        <button type="button" id="id-button" value="Alert">Alert</button>  
+
+    </body>
+</html>
